@@ -111,7 +111,20 @@ def ajouter_salaire(request):
         return redirect('afficher_salaire')
     return render(request, 'salaire/ajoutersalaire.html', {'employes': employes})
 
+def modifier_salaire(request, salaire_id):
+    salaire_instance = get_object_or_404(salaire, id=salaire_id)
 
+    if request.method == 'POST':
+        salaire_instance.salaireBase = request.POST.get('salaireBase')
+        salaire_instance.Prime = request.POST.get('Prime')
+        salaire_instance.heure_Sup = request.POST.get('heure_Sup')
+        salaire_instance.jourAbsence = request.POST.get('jourAbsence')
+        salaire_instance.avance = request.POST.get('avance')
+        salaire_instance.salaireF = request.POST.get('salaireF')
+        salaire_instance.save()
+        return redirect('afficher_salaire')
+
+    return render(request, 'salaire/modifier_salaire.html', {'salaire': salaire_instance})
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
