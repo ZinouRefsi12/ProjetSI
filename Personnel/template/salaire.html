@@ -20,9 +20,17 @@
             <a href="{% url 'afficher_salaire' %}" class="btn btn-primary btn-lg shadow">Afficher les Salaires</a>
         </div>
     </div>
-
+    <form method="post" action="{% url 'add_favoris' %}">
+        {% csrf_token %}
+        <input type="hidden" name="name" value="Afficher Salaires">
+        <input type="hidden" name="link" value="{% url 'afficher_salaire' %}">
+        <button type="submit" class="btn btn-outline-warning">
+            <i class="bi bi-star"></i> Ajouter aux favoris
+        </button>
+    </form>
     <footer class="bg-dark text-white text-center py-3 mt-5">
         <p>&copy; 2025 - Gestion RH</p>
     </footer>
+
 </body>
 </html>
